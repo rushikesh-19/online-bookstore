@@ -1,0 +1,54 @@
+ngb-pagination > .pagination {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+}
+ngb-pagination > .pagination > ol,ul,li {
+    list-style: none;
+}
+ngb-pagination > ul > .page-item .page-link {
+    box-sizing: border-box;
+    border:0;
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px;
+    margin: 0 2px 0 2px;
+    text-decoration: none;
+    color: #555;
+}
+ngb-pagination > ul > .page-item .page-link > span {
+    width: 0;
+    height: 0;
+    font-size: 0;
+}
+ngb-pagination > ul > .page-item > a {
+    display: block;
+}
+ngb-pagination > ul > .page-item.active > a {
+    color: #0e77d9;
+    font-weight: bold;
+}
+ngb-pagination > ul > .page-item > a:hover {
+    color: #0e77d9;
+    font-weight: bold;
+}
+ngb-pagination > ul > .page-item > a[aria-label="First"] {
+    /* background-image: url('../images/common/count_first.gif'); */
+    background: red;
+}
+ngb-pagination > ul > .page-item > a[aria-label="Previous"] {
+    /* background-image: url('../images/common/count_prev.gif'); */
+    background: red;
+}
+ngb-pagination > ul > .page-item > a[aria-label="Next"] {
+    /* background-image: url('../images/common/count_next.gif'); */
+    background: red;
+}
+ngb-pagination > ul > .page-item > a[aria-label="Last"] {
+    /* background-image: url('../images/common/count_end.gif'); */
+    background: red;
+}

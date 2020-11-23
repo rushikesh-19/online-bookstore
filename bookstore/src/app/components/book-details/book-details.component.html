@@ -1,0 +1,122 @@
+<div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">{{book.name}}</strong></div>
+    </div>
+  </div>
+</div>  
+
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{book.imageUrl}}" alt="Image" class="img-fluid">
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-black">{{book.name}}</h2>
+        <p class="mb-4">{{book.description}}</p>
+        <p><strong class="text-primary h4">{{book.unitPrice | currency:'INR'}}</strong></p>
+        <!-- <div class="mb-5">
+                <div class="input-group mb-3" style="max-width: 120px;">
+                
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-primary" (click)="decrementQuantity(cartItem)" type="button"><i class="fas fa-minus"></i></button>
+                    </div>
+                
+                    <span *ngIf="totalQuantity == 0" class="form-control text-center"> 0 </span>
+                    <span *ngIf="totalQuantity != 0" class="form-control text-center"> {{ cartItem.quantity }} </span>
+                    
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" (click)="incrementQuantity(cartItem)" type="button"><i class="fas fa-plus"></i></button>
+                    </div>
+                
+                </div>
+
+        </div> -->
+        <h6>Qty. Available: {{book.unitsInStock}}</h6>
+        <hr />
+
+        <a routerLink="/books" class="btn btn-sm btn-success">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <button (click)="addToCart()" class="buy-now btn btn-sm btn-primary ml-1">Add To Cart</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- <div class="site-section block-3 site-blocks-2 bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-7 site-section-heading text-center pt-4">
+            <h2>Featured Products</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="nonloop-block-3 owl-carousel">
+              <div class="item">
+                <div class="block-4 text-center">
+                  <figure class="block-4-image">
+                    <img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="#">Tank Top</a></h3>
+                    <p class="mb-0">Finding perfect t-shirt</p>
+                    <p class="text-primary font-weight-bold">$50</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="block-4 text-center">
+                  <figure class="block-4-image">
+                    <img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="#">Corater</a></h3>
+                    <p class="mb-0">Finding perfect products</p>
+                    <p class="text-primary font-weight-bold">$50</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="block-4 text-center">
+                  <figure class="block-4-image">
+                    <img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid">
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="#">Polo Shirt</a></h3>
+                    <p class="mb-0">Finding perfect products</p>
+                    <p class="text-primary font-weight-bold">$50</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="block-4 text-center">
+                  <figure class="block-4-image">
+                    <img src="images/cloth_3.jpg" alt="Image placeholder" class="img-fluid">
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="#">T-Shirt Mockup</a></h3>
+                    <p class="mb-0">Finding perfect products</p>
+                    <p class="text-primary font-weight-bold">$50</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="block-4 text-center">
+                  <figure class="block-4-image">
+                    <img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="#">Corater</a></h3>
+                    <p class="mb-0">Finding perfect products</p>
+                    <p class="text-primary font-weight-bold">$50</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->

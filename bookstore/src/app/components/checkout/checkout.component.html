@@ -1,0 +1,285 @@
+<div class="bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0"><a routerLink="/home">Home</a> <span class="mx-2 mb-0">/</span> <a routerLink="/books">Shop</a> <span class="mx-2 mb-0">/</span> <a routerLink="/cart-details">Cart</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Checkout</strong></div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="cartItems.length !=0">
+    <div class="site-section">
+        <div class="container">  
+            <div class="row">
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <div class="p-3 p-lg-5 border"> 
+                        <h2 class="h3 mb-3 text-black">Billing Details</h2>
+                        <form [formGroup] = "checkoutFormGroup" (ngSubmit)="onSubmit()">
+                           
+                            <div formGroupName="customer">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="text-black">First Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"
+                                                formControlName="firstName"
+                                                maxlength="20" 
+                                                [class.is-invalid]="getCustomer().controls['firstName'].invalid && getCustomer().controls['firstName'].touched">
+    
+                                            <div *ngIf="getCustomer().controls['firstName'].errors && (getCustomer().controls['firstName'].valid || getCustomer().controls['firstName'].touched)" class="text-danger">
+                                                <div *ngIf="getCustomer().controls['firstName'].errors.required">
+                                                    First Name is required
+                                                </div>
+                                                <div *ngIf="getCustomer().controls['firstName'].errors.pattern">
+                                                    Enter characters only
+                                                </div>
+                                            </div>
+                                        <!-- {{getCustomer().controls['firstName'].value}} -->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-black">Last Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"
+                                                formControlName="lastName"  
+                                                maxlength="20" 
+                                                [class.is-invalid]="getCustomer().controls['lastName'].invalid && getCustomer().controls['lastName'].touched">
+                                                
+                                            <div *ngIf="getCustomer().controls['lastName'].errors && (getCustomer().controls['lastName'].valid || getCustomer().controls['lastName'].touched)" class="text-danger">
+                                                <div *ngIf="getCustomer().controls['lastName'].errors.required">
+                                                    Last Name is required
+                                                </div>
+                                                <div *ngIf="getCustomer().controls['lastName'].errors.pattern">
+                                                    Enter characters only
+                                                </div>
+                                            </div>
+                                        <!-- {{getCustomer().controls['lastName'].value}} -->
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="text-black"> Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" 
+                                                formControlName="email" 
+                                                pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"  
+                                                [class.is-invalid]="getCustomer().controls['email'].invalid && getCustomer().controls['email'].touched">
+                                            
+                                            <div *ngIf="getCustomer().controls['email'].errors && (getCustomer().controls['email'].valid || getCustomer().controls['email'].touched)" class="text-danger">
+                                                <div *ngIf="getCustomer().controls['email'].errors.required">
+                                                    Email is required
+                                                </div>
+                                                <div *ngIf="getCustomer().controls['email'].errors.pattern">
+                                                    Enter valid email ex: ex@yourmail.com
+                                                </div>
+                                            </div>
+                                        <!-- {{getCustomer().controls['email'].value}} -->
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="text-black">Phone <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" 
+                                                formControlName="phone"
+                                                [class.is-invalid]="getCustomer().controls['phone'].invalid && getCustomer().controls['phone'].touched">
+                                            
+                                            <div *ngIf="getCustomer().controls['phone'].errors && (getCustomer().controls['phone'].valid || getCustomer().controls['phone'].touched )" class="text-danger">
+                                                <div *ngIf="getCustomer().controls['phone'].errors.required">
+                                                    Phone is required
+                                                </div>
+                                                <div *ngIf="getCustomer().controls['phone'].errors.pattern">
+                                                    Phone number must be 10 digits
+                                                </div>
+                                            </div>
+                                        <!-- {{getCustomer().controls['phone'].value}} -->
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <h2 class="h3 mb-3 text-black">Shpping Address</h2>    
+                            <div formGroupName="shippingAddress">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="text-black">Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="street"
+                                                [class.is-invalid]="getShippingAddress().controls['street'].invalid && getShippingAddress().controls['street'].touched">
+                                            
+                                            <div *ngIf="getShippingAddress().controls['street'].errors && (getShippingAddress().controls['street'].valid || getShippingAddress().controls['street'].touched)" class="text-danger">
+                                                <div *ngIf="getShippingAddress().controls['street'].errors.required"> Address is required </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="text-black">City<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="city"
+                                                [class.is-invalid]="getShippingAddress().controls['city'].invalid && getShippingAddress().controls['city'].touched">
+                                        
+                                            <div *ngIf="getShippingAddress().controls['city'].errors && (getShippingAddress().controls['city'].valid || getShippingAddress().controls['city'].touched)" class="text-danger">
+                                                <div *ngIf="getShippingAddress().controls['city'].errors.required"> City is required </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-black">Pincode <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="pincode"
+                                                maxlength="6"
+                                                [class.is-invalid]="getShippingAddress().controls['pincode'].invalid && getShippingAddress().controls['pincode'].touched">
+                                            
+                                            <div *ngIf="getShippingAddress().controls['pincode'].errors && (getShippingAddress().controls['pincode'].valid || getShippingAddress().controls['pincode'].touched)" class="text-danger">
+                                                <div *ngIf="getShippingAddress().controls['pincode'].errors.required"> Pincode required </div>
+                                                <div *ngIf="getShippingAddress().controls['pincode'].errors.pattern || getShippingAddress().controls['pincode'].errors.minLength"> Please enter valid pincode </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="text-black">State<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="state"
+                                                [class.is-invalid]="getShippingAddress().controls['state'].invalid && getShippingAddress().controls['state'].touched">
+                                            
+                                            <div *ngIf="getShippingAddress().controls['state'].errors && (getShippingAddress().controls['state'].valid || getShippingAddress().controls['state'].touched)" class="text-danger">
+                                                <div *ngIf="getShippingAddress().controls['state'].errors.required"> State required </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <label class="form-check text-black">
+                                <input (change)="copyShippingAddressToBillingAddress($event)" 
+                                        onchange="hideBillingAddress()" type="checkbox" class="form-check-input" type="checkbox" > 
+                                    Shipping address is the same as my billing address
+                            </label>
+                            
+                            <h2 class="h3 mb-3 text-black">Billing Address</h2>
+                            <div formGroupName="billingAddress" class="billingAddress">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="text-black">Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="street"
+                                                [class.is-invalid]="getBillingAddress().controls['street'].invalid && getBillingAddress().controls['street'].touched">
+                                            
+                                            <div *ngIf="getBillingAddress().controls['street'].errors && (getBillingAddress().controls['street'].valid || getBillingAddress().controls['street'].touched)" class="text-danger">
+                                                <div *ngIf="getBillingAddress().controls['street'].errors.required"> Address is required </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="text-black">City<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="city"
+                                                [class.is-invalid]="getBillingAddress().controls['city'].invalid && getBillingAddress().controls['city'].touched">
+                                        
+                                            <div *ngIf="getBillingAddress().controls['city'].errors && (getBillingAddress().controls['city'].valid || getBillingAddress().controls['city'].touched)" class="text-danger">
+                                                <div *ngIf="getBillingAddress().controls['city'].errors.required"> City is required </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-black">Pincode <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="pincode"
+                                                maxlength="6"
+                                                [class.is-invalid]="getBillingAddress().controls['pincode'].invalid && getBillingAddress().controls['pincode'].touched">
+                                            
+                                            <div *ngIf="getBillingAddress().controls['pincode'].errors && (getBillingAddress().controls['pincode'].valid || getBillingAddress().controls['pincode'].touched)" class="text-danger">
+                                                <div *ngIf="getBillingAddress().controls['pincode'].errors.required"> Pincode required </div>
+                                                <div *ngIf="getBillingAddress().controls['pincode'].errors.pattern || getBillingAddress().controls['pincode'].errors.minLength"> Please enter valid pincode </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="text-black">State<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" 
+                                                formControlName="state"
+                                                [class.is-invalid]="getBillingAddress().controls['state'].invalid && getBillingAddress().controls['state'].touched">
+                                            
+                                            <div *ngIf="getBillingAddress().controls['state'].errors && (getBillingAddress().controls['state'].valid || getBillingAddress().controls['state'].touched)" class="text-danger">
+                                                <div *ngIf="getBillingAddress().controls['state'].errors.required"> State required </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" [disabled]="checkoutFormGroup.invalid" class="btn btn-primary btn-lg py-3 btn-block">Place Order</button>
+                            </div>
+    
+                        </form>
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h2 class="h3 mb-3 text-black">{{cartItems.length}} Order you have yet</h2>
+                            <div class="p-3 p-lg-5 border">
+                                
+                                <table class="table site-block-order-table mb-5">
+                                    <thead>
+                                        <th>Product</th>
+                                        <th>Total</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let cartItem of cartItems">
+                                            <td>{{cartItem.name}}<strong class="mx-2">x</strong> {{cartItem.quantity}}</td>
+                                            <td>{{cartItem.quantity * cartItem.unitPrice | currency:'INR'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+                                            <td class="text-black">{{totalPrice | currency: 'INR'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                            <td class="text-black font-weight-bold"><strong>{{totalPrice | currency: 'INR'}}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+    
+                            <!-- <div class="border p-3 mb-3">
+                                <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsebank" role="button" aria-expanded="false" aria-controls="collapsebank">Direct Bank Transfer</a></h3>
+    
+                                <div class="collapse" id="collapsebank">
+                                <div class="py-2">
+                                    <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                </div>
+                                </div>
+                            </div>
+    
+                            <div class="border p-3 mb-3">
+                                <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsecheque" role="button" aria-expanded="false" aria-controls="collapsecheque">Cheque Payment</a></h3>
+    
+                                <div class="collapse" id="collapsecheque">
+                                <div class="py-2">
+                                    <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                </div>
+                                </div>
+                            </div>
+    
+                            <div class="border p-3 mb-5">
+                                <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsepaypal" role="button" aria-expanded="false" aria-controls="collapsepaypal">Paypal</a></h3>
+    
+                                <div class="collapse" id="collapsepaypal">
+                                <div class="py-2">
+                                    <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                </div>
+                                </div>
+                            </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+
+<div *ngIf="cartItems.length == 0">
+    <div class="row" style="margin-top:100px;margin-bottom:100px;">
+        <div class="col-md-6 offset-md-2">
+            <h2>0 order you have yet</h2>
+            <button class="btn btn-outline-primary btn-sm btn-block" routerLink="/books">Continue Shopping</button>
+        </div>
+    </div>
+</div>
+

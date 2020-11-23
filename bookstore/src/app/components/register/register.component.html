@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-12 d-flex flex-column justify-content-center">
+          <div class="row">
+              <div class="col-lg-6 col-md-8 mx-auto">
+
+                  <!-- form card login -->
+                  <div class="card rounded shadow shadow-sm" data-aos="fade">
+                      <div class="card-header">
+                          <h3 class="mb-0">Register</h3>
+                      </div>
+                      <div class="card-body">
+                          <form class="form" role="form" autocomplete="off" #userForm="ngForm" novalidate>
+                            
+                            <div *ngIf="invalidRegister">
+                              <div class="mt-4 alert alert-danger">User already registered in this email</div>
+                            </div>
+
+                            <div class="form-group">
+                              <label>Name</label>
+                              <input type="text" required #name="ngModel"
+                              [class.is-invalid]="name.invalid && name.touched"  class="form-control form-control-lg rounded-0"
+                              pattern="^[A-Z a-z]+$"
+                              maxlength="40" 
+                              name="name" [(ngModel)]="user.name" 
+                              ngModel>
+                              <!-- <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small> -->
+                              <div *ngIf="name.errors && (name.valid || name.touched)">
+                                <small class="text-danger" *ngIf="name.errors.required">Please enter your name</small>
+                                <small class="text-danger" *ngIf="name.errors.pattern">Please enter valid name you should not add any number for your name</small>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input type="email" required #email="ngModel" 
+                              [class.is-invalid]="email.invalid && email.touched"  class="form-control form-control-lg rounded-0"
+                              name="email" [(ngModel)]="user.email" 
+                              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" email
+                              ngModel>
+                              <div *ngIf="email.errors && (email.valid || email.touched)">
+                                <small class="text-danger" *ngIf="email.errors.required">Please enter your email</small>
+                                <small class="text-danger" *ngIf="email.errors.pattern">Please enter valid email</small>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label>Password</label>
+                              <input type="password" required #password="ngModel"
+                              [class.is-invalid]="password.invalid && password.touched" class="form-control form-control-lg rounded-0" autocomplete="new-password"
+                              name="password" [(ngModel)]="user.password"
+                              ngModel>
+                                <small class="text-danger" [class.d-none]="password.valid || password.untouched">Please enter your password</small>
+                            </div>
+                            <div class="form-group">
+                              <label>Phone</label>
+                              <input type="tel" #phone="ngModel" pattern="^\d{10}$" required
+                              [class.is-invalid]="phone.invalid && phone.touched"  class="form-control form-control-lg rounded-0"
+                              name="phone" [(ngModel)]="user.phone"
+                              ngModel />
+                              <div *ngIf="phone.errors &&(phone.valid || phone.touched)">
+                                <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>
+                                <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digits</small>
+                              </div>
+                            </div>
+                            <button type="button" [disabled]="userForm.form.invalid" (click)="registerUser()" class="btn btn-primary btn-lg btn-block float-left">Register!</button>
+                            <div class="mt-2 float-right">
+                            Already registered?
+                            <a routerLink="/login">login here</a>
+                            </div>
+                          </form>
+                      </div>
+                      <!--/card-block-->
+                  </div>
+                  <!-- /form card login -->
+              </div>
+          </div>
+          <!--/row-->
+      </div>
+      <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->
+
+<div style="margin-bottom: 150px;"></div>
